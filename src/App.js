@@ -36,7 +36,7 @@ function App() {
         </h1>
 
         <button onClick={handleSendMessage} className="App-button" aria-label="Go to messenger to send response">
-          Go to messenger for your response.
+        Click to go back to messenger for your response.
         </button>
 
         {/* Conditional Modal */}
@@ -47,7 +47,7 @@ function App() {
               <h2 id="modal-title">Invitation</h2>
               <p id="modal-description" className="App-new-year-message">
                 Dear Jobi,<br /><br />
-                I hope you're doing well. I was thinking it would be nice to spend some time together. Would you like to join me for a movie this evening? After that, we could grab a meal and keep it light and fun.<br /><br />
+                I hope you're doing well. I was thinking it would be nice to spend some time together. Would you like to join me for a movie? let me know your free this day, but I preferred time is 5:00PM up, After that, we could grab a meal if you like.<br /><br />
                 Let me know if you're interested and if you'd like to join me.<br /><br />
                 Best regards,<br />
                 Ybonie Somogod
