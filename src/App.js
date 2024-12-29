@@ -50,7 +50,7 @@ function App() {
                 I hope you're doing well. I was thinking it would be nice to spend some time together. Would you like to join me for a movie? let me know your free this day, but I preferred time is 5:00PM up, After that, we could grab a meal if you like.<br /><br />
                 Let me know if you're interested and if you'd like to join me.<br /><br />
                 Best regards,<br />
-                Ybonie Somogod
+                Bunie
               </p>
             </div>
           </div>
