@@ -1,0 +1,182 @@
+/* Snowflakes animation */
+.snowflakes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  .snowflake {
+    position: absolute;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    background-color: #f7f7f7; /* Light cream color for the snowflakes */
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall linear infinite;
+  }
+  
+  @keyframes fall {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(100vh) translateX(calc(100vw * 0.2 - 50%));
+      opacity: 0;
+    }
+  }
+  
+  /* General styling */
+  .NewYearApp {
+    text-align: center;
+  }
+  
+  .NewYearApp-header {
+    background-color: #d3b09c; /* PANTONE 17-1230 Mocha Mousse color */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  
+  /* "Happy New Year!" title animation */
+  .NewYearApp-title {
+    font-size: 4rem;
+    font-family: 'Cursive', sans-serif;
+    color: #4f3c31; /* Darker Mocha Mousse for the title */
+    animation: bounceTitle 2s ease-out infinite, fadeIn 2s ease-out; /* Infinite bounce and fade-in */
+  }
+  
+  /* Continuous Bounce effect for title */
+  @keyframes bounceTitle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-10px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    75% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .NewYearApp-message {
+    font-size: 1.5rem;
+    color: #4f3c31; /* Dark Mocha Mousse text color */
+  }
+  
+  /* Rope-style number styling with 3D effect */
+  .rope-number {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    animation: bounceIn 2s ease-out infinite; /* Add infinite bounce effect */
+  }
+  
+  .rope-digit {
+    font-size: 8rem; /* Increase size for emphasis */
+    font-family: 'Cursive', sans-serif;
+    color: #4f3c31; /* Dark Mocha Mousse color for the digits */
+    padding: 20px;
+    margin: 5px;
+    text-align: center;
+    display: inline-block;
+    transform: rotate(-10deg); /* Slight tilt for rope effect */
+    
+    /* 3D effect using text-shadow and transform */
+    position: relative;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    background: #f7f7f7; /* Light cream background to contrast with the text */
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* 3D hover effect */
+  .rope-digit:hover {
+    transform: rotate(-10deg) scale(1.1); /* Slight zoom effect on hover */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+  }
+  
+  /* Adjustments for shadow and depth */
+  .rope-number .rope-digit:nth-child(odd) {
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for odd digits */
+  }
+  
+  .rope-number .rope-digit:nth-child(even) {
+    text-shadow: 8px 8px 25px rgba(0, 0, 0, 0.3); /* Deeper shadow for even digits */
+  }
+  
+  /* Bounce animation for the 2025 digits */
+  @keyframes bounceIn {
+    0% {
+      transform: translateY(100px) scale(0.5); /* Start off-screen and small */
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(-30px) scale(1.1); /* Bounce up slightly */
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0) scale(1); /* Settle in the final position */
+    }
+  }
+  
+  /* Fireworks effect */
+  .firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    animation: fireworkAnimation 1.5s infinite, fireworkPlacement 3s infinite;
+  }
+  
+  @keyframes fireworkAnimation {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes fireworkPlacement {
+    0% {
+      left: 50%;
+      top: 0;
+    }
+    100% {
+      left: calc(50% + (Math.random() * 40 - 20)vw);
+      top: calc(50% + (Math.random() * 50 - 25)vh);
+    }
+  }
+  
