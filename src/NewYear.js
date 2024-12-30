@@ -30,7 +30,7 @@ function NewYearApp() {
           🎉 Happy New Year! 🎉
         </h1>
         <h1 className="NewYearApp-title">
-          SOMOGOD FAMILY
+          From Somogod family to yours! 🎉
         </h1>
         <p className="NewYearApp-message">
           May the new year bring you joy, prosperity, and unforgettable moments!
