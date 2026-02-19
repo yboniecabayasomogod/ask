@@ -1,165 +1,301 @@
-/* General mobile optimizations */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap');
 
 .App {
-  position: relative;
-  min-height: 100vh;
-  background-color: #8BC34A;
-  background-image: url('green-background-image.jpg');
+  text-align: center;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.App-header {
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(5px);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App-logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
   overflow: hidden;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  margin-top: 40px;
+  margin-bottom: 15px;
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.App-title {
+  color: #ffffff;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* --- THE ENVELOPE --- */
+.envelope-container {
+  position: relative;
+  width: 250px;
+  height: 180px;
+  background: #a67c52; 
+  border-radius: 0 0 5px 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  width: 0; height: 0;
+  border-left: 125px solid transparent;
+  border-right: 125px solid transparent;
+  border-top: 100px solid #8b5a2b; 
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 3;
+}
+
+.open .flap { transform: rotateX(180deg); z-index: 1; }
+
+.front {
+  position: absolute;
+  top: 0;
+  width: 0; height: 0;
+  border-left: 125px solid #cdaa7d;
+  border-right: 125px solid #cdaa7d;
+  border-bottom: 90px solid #d2b48c;
+  border-top: 90px solid transparent;
+  border-radius: 0 0 5px 5px;
+  z-index: 4;
+}
+
+.front::after {
+  content: "✉";
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  background: #8b0000;
+  color: #ffd700;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 10px; /* Padding for small screens */
+  font-size: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  border: 1px solid #5a0000;
 }
 
-/* Logo */
-.App-logo {
-  max-width: 100%;
-  height: auto;
-  width: 120px; /* Adjust size for small devices */
-}
-
-/* Title styling */
-.App-title {
-  color: white;
-  font-size: calc(1.5rem + 2vw); /* Scalable font size */
-  font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-  margin-bottom: 15px;
-}
-
-/* Button styling */
-.App-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: calc(0.9rem + 1vw); /* Scalable button font size */
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.App-button:hover {
-  background-color: #45a049;
-}
-
-/* Modal styling */
-.App-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 10px;
+.letter-inside {
+  position: absolute;
+  top: 10px;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  background: #fdf5e6; 
   z-index: 2;
-  width: 90%; /* Ensure modal width fits within small screens */
-  max-width: 500px; /* Max width to prevent overflow */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s;
+  border: 1px solid #e3d5b8;
 }
 
-.App-modal-content {
-  text-align: justify;
+.open .letter-inside { transform: translateY(-70px); }
+
+.hint-text {
+  margin-top: 210px;
+  color: #d2b48c;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
-/* Close button */
-.App-close {
+/* --- MODAL --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
   background: transparent;
+  width: 95%;
+  max-width: 500px;
+  position: relative;
+}
+
+.modal-close-x {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #8b5a2b;
+  color: #f4ecd8;
   border: none;
-  font-size: 2rem;
-  color: #333;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 24px;
   cursor: pointer;
+  display: flex; /* Centering the X */
+  justify-content: center;
+  align-items: center;
+  z-index: 102;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-/* Media queries for Android phones */
-@media (max-width: 768px) {
-  .App {
-    padding: 15px;
-  }
-
-  /* Scalable title font size */
-  .App-title {
-    font-size: calc(1.2rem + 4vw);
-  }
-
-  /* Button size */
-  .App-button {
-    padding: 14px 28px;
-    font-size: calc(1rem + 2vw);
-  }
-
-  /* Adjust modal width */
-  .App-modal {
-    width: 95%;
-  }
-
-  /* Adjust modal text size */
-  .App-new-year-message {
-    font-size: calc(1rem + 1.5vw);
-  }
+.palanca-paper {
+  text-align: left;
+  line-height: 1.8;
+  padding: 40px 30px;
+  background-color: #fdf5e6;
+  background-image: 
+    linear-gradient(rgba(205, 170, 125, 0.1) 1px, transparent 1px), 
+    url("https://www.transparenttextures.com/patterns/pinstriped-suit.png");
+  background-size: 100% 1.8em, auto;
+  border: 1px solid #d2b48c;
+  border-left: 20px solid #f4ecd8; /* Vintage paper margin */
+  box-shadow: inset 0 0 50px rgba(139, 90, 43, 0.1);
+  
+  /* RESPONSIVE SCROLLING */
+  max-height: 60vh; 
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cdaa7d #fdf5e6;
 }
 
-/* Further tweaks for very small devices like older Android phones */
-@media (max-width: 480px) {
-  .App-logo {
-    width: 500px; /* Further reduce logo size */
-  }
-
-  .App-title {
-    font-size: calc(1.5rem + 4vw); /* Increase font size */
-  }
-
-  .App-button {
-    padding: 16px 32px;
-    font-size: calc(1rem + 2.5vw);
-  }
-
-  .App-modal {
-    width: 90%;
-  }
+.letter-header {
+  font-family: 'Dancing Script', cursive;
+  color: #5d4037;
+  border-bottom: 1px solid rgba(93, 64, 55, 0.2);
+  padding-bottom: 10px;
 }
 
-/* Logo styling */
-.App-logo {
-  max-width: 100%; /* Ensures it doesn't overflow */
-  width: 500px; /* Set a minimum width for the logo */
-  height: auto; /* Keeps aspect ratio intact */
-  max-height: 500px; /* Set a max height for the logo */
+.signature {
+  margin-top: 30px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.4rem;
+  color: #5d4037;
 }
 
-/* Add this CSS to your App.css */
-
-/* Define a pulse animation */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Apply the animation to the App-title */
-.App-title-warning {
-  animation: pulse 1.5s infinite; /* Pulse every 1.5 seconds */
+.reply-button {
+  background: #5d4037;
   color: white;
-  font-size: calc(1.5rem + 2vw); /* Scalable font size */
+  border: none;
+  padding: 1px 1px;
+  border-radius: 30px;
+  margin-top: 20px;
   font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-  margin-bottom: 15px;
   cursor: pointer;
+  width: 100%;
+}
+
+/* --- PASSWORD CARD DESIGN --- */
+.password-card {
+  background: #fdf5e6; /* Match the paper color */
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid #8b5a2b;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  text-align: center;
+  width: 90%;
+  max-width: 320px;
+  animation: fadeIn 0.3s ease;
+}
+
+.password-card h3 {
+  font-family: 'Dancing Script', cursive;
+  color: #5d4037;
+  font-size: 1.8rem;
+  margin-top: 0;
+}
+
+.password-card p {
+  font-size: 0.9rem;
+  color: #5d4037;
+  margin-bottom: 20px;
+}
+
+.password-card input {
+  width: 80%;
+  padding: 12px;
+  border: 1px solid #d2b48c;
+  border-radius: 8px;
+  background: #fff;
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+  font-size: 1rem;
+  outline: none;
+}
+
+.error-shake {
+  animation: shake 0.4s;
+  border-color: #ff4d6d !important;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.error-text {
+  color: #ff4d6d;
+  font-size: 0.75rem;
+  display: block;
+  margin-top: 10px;
+}
+
+.pwd-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pwd-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.pwd-buttons button:first-child {
+  background: transparent;
+  color: #8b5a2b;
+}
+
+.unlock-btn {
+  background: #8b5a2b;
+  color: #f4ecd8;
+}
+
+.unlock-btn:hover {
+  opacity: 0.9;
 }

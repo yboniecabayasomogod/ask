@@ -1,57 +1,143 @@
-import pandaLogo from './panda.png'; // new panda logo
 import './App.css';
+import bgImage from './assets/images/background.jpg';
+import myLogo from './assets/images/logo.png';
 import { useState } from 'react';
 
 function App() {
+  const [isOpening, setIsOpening] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isLocked, setIsLocked] = useState(false); // New state for password UI
+  const [passwordInput, setPasswordInput] = useState('');
+  const [error, setError] = useState(false);
 
-  // Handle the message sending process
-  const handleSendMessage = () => {
-    const baseMessengerLink = "https://m.me/ybonie.somogod.94";
-
-    if (navigator.userAgent.includes("iPhone") || navigator.userAgent.includes("iPad")) {
-      window.location.href = baseMessengerLink;
-    } else {
-      window.open(baseMessengerLink, "_blank");
+  const handleEnvelopeClick = () => {
+    if (!isOpening) {
+      setIsLocked(true); // Show the custom password card
     }
   };
 
-  // Toggle modal visibility
-  const toggleModal = () => setShowModal(prevState => !prevState);
+  const checkPassword = () => {
+    // Your password "020700"
+    if (passwordInput === "208040") {
+      setIsLocked(false);
+      setIsOpening(true);
+      setTimeout(() => {
+        setShowModal(true);
+      }, 800);
+    } else {
+      setError(true);
+      setTimeout(() => setError(false), 500); // Shakes the input if wrong
+    }
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+    setIsOpening(false);
+    setPasswordInput('');
+  };
 
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundImage: `url(${bgImage})` }}>
       <header className="App-header">
-        <img src={pandaLogo} className="App-logo" alt="panda logo" />
-        
-        {/* Clickable text replacing the "View Invitation" button */}
-        <h1 className="App-title">
-          Would You Go Out With Me?
-        </h1>
-        <h1 className="App-title">
-         
-        </h1>
-        <h1 className="App-title-warning" onClick={toggleModal} style={{ cursor: "pointer" }}>
-        Click this to view the invitation 📨
-        </h1>
+        <img src={myLogo} className="App-logo" alt="logo" />
+        <h1 className="App-title">To My Gorgeous Cousin, Steffanie</h1>
 
-        <button onClick={handleSendMessage} className="App-button" aria-label="Go to messenger to send response">
-        Click to go back to messenger for your response.
-        </button>
+        {/* --- ENVELOPE --- */}
+        <div className={`envelope-container ${isOpening ? 'open' : ''}`} onClick={handleEnvelopeClick}>
+          <div className="envelope">
+            <div className="flap"></div>
+            <div className="front"></div>
+            <div className="letter-inside">
+              <p>For Steff...</p>
+            </div>
+          </div>
+          {!isOpening && <p className="hint-text">Click to enter password & open</p>}
+        </div>
 
-        {/* Conditional Modal */}
+        {/* --- CUSTOM PASSWORD MODAL --- */}
+        {isLocked && (
+          <div className="modal-overlay">
+            <div className="password-card">
+              <h3>🔐 Secret Key</h3>
+              <p>Para kay Steffanie lang 'to. <br/> Ano ang password?</p>
+              <input 
+                type="password" 
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                placeholder="Enter password..."
+                className={error ? 'error-shake' : ''}
+                onKeyDown={(e) => e.key === 'Enter' && checkPassword()}
+                autoFocus
+              />
+              <div className="pwd-buttons">
+                <button onClick={() => setIsLocked(false)} className="cancel-btn">Cancel</button>
+                <button onClick={checkPassword} className="unlock-btn">Unlock</button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* --- THE LETTER MODAL --- */}
         {showModal && (
-          <div className="App-modal" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description">
-            <div className="App-modal-content">
-              <button className="App-close" onClick={toggleModal} aria-label="Close the modal">&times;</button>
-              <h2 id="modal-title">Invitation</h2>
-              <p id="modal-description" className="App-new-year-message">
-                Dear Jobi,<br /><br />
-                I hope you're doing well. I was thinking it would be nice to spend some time together. Would you like to join me for a movie? let me know your free this day, but I preferred time is 5:00PM up, After that, we could grab a meal if you like.<br /><br />
-                Let me know if you're interested and if you'd like to join me.<br /><br />
-                Best regards,<br />
-                Bunie
-              </p>
+          <div className="modal-overlay" onClick={handleClose}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <button className="modal-close-x" onClick={handleClose}>&times;</button>
+              <div className="palanca-paper">
+                <h2 className="letter-header">Hi Steff!</h2>
+                <div className="letter-body">
+                  <p>
+                    Habang ginagawa ko ang website na 'to, na-realize ko kung gaano kabilis ang panahon. Parang kailan lang
+                    bata pa tayo, pero ngayon, ang layo na ng nararating mo sa studies mo. Sobrang proud ako 
+                    sa sipag mo at sa dedication mong matapos ang lahat ng goals mo.
+                  </p>
+                  
+                  <p>
+                    Gusto ko lang sabihin na nakakamangha <strong>how beautifully God created you</strong>. 
+                    Lagi kang gorgeous at effortless tingnan, pero alam ko na behind that grace, marami kang 
+                    pinagdaanang puyat at hirap sa mga projects at exams. Konting tiis na lang, Steff, malapit 
+                    ka na sa finish line! Don't ever lose that shine.
+                  </p>
+
+                  <p>
+                    I know nakaka-overwhelm lalo na kapag sabay-sabay ang deadlines, kaya gusto ko lang 
+                    i-share sa'yo ang favorite life verse ko. Ito ang laging nagpapatatag sa akin 
+                    sa tuwing nahihirapan ako:
+                  </p>
+
+                  <div className="scripture-box">
+                    <p>"Jesus said to him, ‘If you can believe, all things are possible to him who believes.’"</p>
+                    <span>— Mark 9:23</span>
+                  </div>
+
+                  <p>
+                    Tandaan mo lang 'yan palagi when you living in the creation of God. Maniwala ka sa kakayahan mo, at higit 
+                    sa lahat, maniwala ka sa plano ni Lord para sa'yo. Dahil sa Kaniya, 
+                    <strong> all things are possible.</strong>
+                  </p>
+
+                  <p>
+                    Enjoy-in mo lang itong retreat. Take this time to breathe and relax muna bago bumalik 
+                    sa school works. Nandito lang kami palagi para sa'yo.
+                  </p>
+                  
+                  <p className="signature">Always here for you,<br /><strong>Ybonie</strong></p>
+                  
+                  <div className="response-container">
+                    <a 
+                      href="https://m.me/ybonie.somogod.94" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="mini-envelope-btn"
+                    >
+                      <span className="envelope-icon">✉</span>
+                      <div className="btn-text">
+                        <span>Click if mag thank you,</span>
+                        <span>else, OK lang... ❤️</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
