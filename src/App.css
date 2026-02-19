@@ -173,6 +173,8 @@
   line-height: 1.8;
   padding: 40px 30px;
   background-color: #fdf5e6;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
   background-image: 
     linear-gradient(rgba(205, 170, 125, 0.1) 1px, transparent 1px), 
     url("https://www.transparenttextures.com/patterns/pinstriped-suit.png");
