@@ -42,17 +42,33 @@ function App() {
         <img src={myLogo} className="App-logo" alt="logo" />
         <h1 className="App-title">To My Gorgeous Cousin, Steffanie</h1>
 
-        {/* --- ENVELOPE --- */}
-        <div className={`envelope-container ${isOpening ? 'open' : ''}`} onClick={handleEnvelopeClick}>
-          <div className="envelope">
-            <div className="flap"></div>
-            <div className="front"></div>
-            <div className="letter-inside">
-              <p>For Steff...</p>
-            </div>
-          </div>
-          {!isOpening && <p className="hint-text">Click to enter password & open</p>}
-        </div>
+      {/* --- ENVELOPE --- */}
+<div 
+  className={`envelope-container ${isOpening ? 'open' : 'waiting-to-open'}`} 
+  onClick={handleEnvelopeClick}
+>
+  {/* NEW: Background glow that draws the eye to the center */}
+  {!isOpening && <div className="eye-catcher-glow"></div>}
+
+  <div className="envelope">
+    <div className="flap">
+      {!isOpening && <div className="open-badge">OPEN ME</div>}
+    </div>
+    <div className="front"></div>
+    
+    {/* The letter now has a 'peek' class to show just the top edge */}
+    <div className={`letter-inside ${!isOpening ? 'peek' : ''}`}>
+      <p>For Steff...</p>
+    </div>
+  </div>
+  
+  {!isOpening && (
+    <div className="hint-container animated-hint">
+      <span className="finger-pointer">👆</span>
+      <p className="hint-text">OPEN IT</p>
+    </div>
+  )}
+</div>
 
         {/* --- CUSTOM PASSWORD MODAL --- */}
         {isLocked && (
