@@ -65,7 +65,7 @@ function App() {
   {!isOpening && (
     <div className="hint-container animated-hint">
       <span className="finger-pointer">👆</span>
-      <p className="hint-text">OPEN IT</p>
+      <p className="hint-text">Nakita mo Yan? Buksan mo po!</p>
     </div>
   )}
 </div>
@@ -75,7 +75,7 @@ function App() {
           <div className="modal-overlay">
             <div className="password-card">
               <h3>🔐 Secret Key</h3>
-              <p>Para kay Steffanie lang 'to. <br/> Ano ang password?</p>
+              <p>Para kay Steffanie lang 'to. <br/> Ano ang password? <br/>Chati si kuya Bon!</p>
               <input 
                 type="password" 
                 value={passwordInput}
@@ -108,7 +108,7 @@ function App() {
                   </p>
                   
                   <p>
-                    Gusto ko lang sabihin na nakakamangha <strong>how beautifully God created you</strong>. 
+                    Gusto ko lang sabihin na nakakamangha ka, <strong>how beautifully God created you</strong>. 
                     Lagi kang gorgeous at effortless tingnan, pero alam ko na behind that grace, marami kang 
                     pinagdaanang puyat at hirap sa mga projects at exams. Konting tiis na lang, Steff, malapit 
                     ka na sa finish line! Don't ever lose that shine.
@@ -132,11 +132,11 @@ function App() {
                   </p>
 
                   <p>
-                    Enjoy-in mo lang itong retreat. Take this time to breathe and relax muna bago bumalik 
+                    Enjoy-in niyo lang ang inyong retreat. Take this time to breathe and relax muna bago bumalik 
                     sa school works. Nandito lang kami palagi para sa'yo.
                   </p>
                   
-                  <p className="signature">Always here for you,<br /><strong>Ybonie</strong></p>
+                  <p className="signature">Always here for you,<br /><strong>Family & Kuya Ybonie</strong></p>
                   
                   <div className="response-container">
                     <a 
